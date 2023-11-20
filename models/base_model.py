@@ -56,4 +56,5 @@ class BaseModel:
         return dict_copy
 
     def delete(self):
+        from models import storage
         storage.delete(self)
