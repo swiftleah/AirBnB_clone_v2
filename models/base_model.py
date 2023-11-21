@@ -4,7 +4,6 @@ import uuid
 from datetime import datetime
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
-import models
 
 
 Base = declarative_base()
@@ -22,7 +21,6 @@ class BaseModel:
             from models import storage
             self.id = str(uuid.uuid4())
             self.created_at = self.updated_at = datetime.utcnow()
-            # storage.new(self)
         else:
             if 'updated_at' in kwargs:
                 kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
@@ -56,4 +54,5 @@ class BaseModel:
         return dict_copy
 
     def delete(self):
+        """ deletes storage """
         storage.delete(self)
