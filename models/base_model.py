@@ -40,13 +40,11 @@ class BaseModel:
                 self.id = str(uuid.uuid4())
         else:
             self.id = str(uuid.uuid4())
-            self.created_at = datetime.utcnow()
-            self.updated_at = self.created_at
+            self.created_at = self.updated_at = datetime.utcnow()
 
     def __str__(self):
-        """String representation of the BaseModel instance."""
-        return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id,
-                                         self.__dict__)
+        """ String representation of BaseModel instance """
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """Update 'updated_at' attribute with the current datetime."""
