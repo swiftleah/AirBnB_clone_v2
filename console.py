@@ -94,40 +94,53 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, arg):
         """Update an instance based on the class name, id, attribute & value."""
         args = shlex.split(arg)
-        integers = ["number_rooms", "number_bathrooms", "max_guest",
-                    "price_by_night"]
-        floats = ["latitude", "longitude"]
-        if len(args) == 0:
+
+        if not args:
             print("** class name missing **")
-        elif args[0] in CLASSES:
-            if len(args) > 1:
-                k = args[0] + "." + args[1]
-                if k in models.storage.all():
-                    if len(args) > 2:
-                        if len(args) > 3:
-                            if args[0] == "Place":
-                                if args[2] in integers:
-                                    try:
-                                        args[3] = int(args[3])
-                                    except:
-                                        args[3] = 0
-                                elif args[2] in floats:
-                                    try:
-                                        args[3] = float(args[3])
-                                    except:
-                                        args[3] = 0.0
-                            setattr(models.storage.all()[k], args[2], args[3])
-                            models.storage.all()[k].save()
-                        else:
-                            print("** value missing **")
-                    else:
-                        print("** attribute name missing **")
-                else:
-                    print("** no instance found **")
-            else:
-                print("** instance id missing **")
-        else:
+            return
+
+        class_name = args[0]
+        if class_name not in CLASSES:
             print("** class doesn't exist **")
+            return
+
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
+
+        instance_id = class_name + "." + args[1]
+        all_instances = models.storage.all()
+
+        if instance_id not in all_instances:
+            print("** no instance found **")
+            return
+
+        instance = all_instances[instance_id]
+
+        if len(args) < 3:
+            print("** attribute name missing **")
+            return
+
+        attribute_name = args[2]
+        if len(args) < 4:
+            print("** value missing **")
+            return
+
+        value = args[3]
+        if attribute_name == "Place":
+            if attribute_name in ["number_rooms", "number_bathrooms", "max_guest", "price_by_night"]:
+                try:
+                    value = int(value)
+                except ValueError:
+                    value = 0
+            elif attribute_name in ["latitude", "longitude"]:
+                try:
+                    value = float(value)
+                except ValueError:
+                    value = 0.0
+
+        setattr(instance, attribute_name, value)
+        instance.save()
 
     def do_destroy(self, arg):
         """Delete an instance based on the class and id."""
