@@ -1,5 +1,5 @@
 #!/usr/bin/python
-"""Defines the Place class."""
+""" Place class """
 
 import models
 from models.base_model import BaseModel, Base
@@ -19,7 +19,7 @@ if models.switch == 'db':
 
 
 class Place(BaseModel, Base):
-    """Representation of a Place."""
+    """Representation of a Place - inherits from BaseModel and Base respectively """
     if models.switch == 'db':
         __tablename__ = 'places'
         city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)

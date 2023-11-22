@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Defines the class User"""
+""" User """
 import models
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship
 
 
 class User(BaseModel, Base):
-    """Represents a user """
+    """ class User that inherits from Basemodel and Base respectively """
     if models.switch == 'db':
         __tablename__ = 'users'
         email = Column(String(128), nullable=False)
@@ -16,6 +16,7 @@ class User(BaseModel, Base):
         last_name = Column(String(128), nullable=True)
         places = relationship("Place", backref="user")
         reviews = relationship("Review", backref="user")
+
     else:
         email = ""
         password = ""

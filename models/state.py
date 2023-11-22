@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Defines the State class."""
+""" State """
 
 import models
 from models.base_model import BaseModel, Base
@@ -8,11 +8,12 @@ from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 
 class State(BaseModel, Base):
-    """Representation of a state."""
+    """ State - inherits from Basemodel and Base respectively """
     if models.switch == "db":
         __tablename__ = 'states'
         name = Column(String(128), nullable=False)
         cities = relationship("City", backref="state")
+
     else:
         name = ""
 
@@ -23,6 +24,6 @@ class State(BaseModel, Base):
     if models.switch != "db":
         @property
         def cities(self):
-            """Getter for a list of city instances related to the state."""
+            """ Getter for city instances related to the state """
             return [city for city in models.storage.all(City).values()
                     if city.state_id == self.id]
