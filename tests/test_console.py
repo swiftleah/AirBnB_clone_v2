@@ -11,7 +11,7 @@ HBNBCommand = console.HBNBCommand
 
 class TestConsole(unittest.TestCase):
     """Class for testing documentation of the console"""
-     def setUp(self):
+    def setUp(self):
         """Set up the PEP8 StyleGuide object for testing"""
         self.pep8s = pep8.StyleGuide(quiet=True)
 
