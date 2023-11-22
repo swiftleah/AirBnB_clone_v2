@@ -163,9 +163,10 @@ class HBNBCommand(cmd.Cmd):
                 models.storage.save()
 
     def do_all(self, arg):
-        """Print string representations of instances."""
+        """Print string rep of instances."""
         args = shlex.split(arg)
         obj_list = []
+
         if len(args) == 0:
             obj_dict = models.storage.all()
         elif args[0] in CLASSES:
@@ -173,11 +174,10 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
             return False
-        for key in obj_dict:
-            obj_list.append(str(obj_dict[key]))
-        print("[", end="")
-        print(", ".join(obj_list), end="")
-        print("]")
+
+        obj_list = [str(obj_dict[key]) for key in obj_dict]
+        print("[" + ", ".join(obj_list) + "]")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
