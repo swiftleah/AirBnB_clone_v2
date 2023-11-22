@@ -1,23 +1,27 @@
 #!/usr/bin/python3
-""" State Module for HBNB project """
+""" Defines the State class."""
+import models
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String
+from models.city import City
+import sqlalchemy
+from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
-from models.engine.file_storage import FileStorage
-
 
 class State(BaseModel, Base):
-    """ State class that inherits from Base """
-    __tablename__ = 'states'
-    name = Column(String(128), nullable=False)
-    if FileStorage == 'db':
-        cities = relationship("City", backref="state", cascase="all, delete")
+    """Representation of State"""
+    if models.storage_type == "db":
+        __tablename__ = 'states'
+        name = Column(String(128), nullable=False)
+        cities = relationship("City", backref="state")
     else:
+        name = ""
+
+    def __init__(self, *args, **kwargs):
+        """Initializes State"""
+        super().__init__(*args, **kwargs)
+
+    if models.storage_type != "db":
         @property
         def cities(self):
-            """ getter for 'cities' property of 'State' class """
-            cityList = []
-            for city in models.storage.all("City").values():
-                if city.state.id == self.id:
-                    cityList.append(city)
-            return cityList
+            """Getter for a list of City instances related to the state"""
+            return [city for city in models.storage.all(City).values() if city.state_id == self.id]
