@@ -2,9 +2,10 @@
 """ Unittesting """
 from tests.test_models.test_base_model import test_basemodel
 from models.review import Review
+import unittest
 
 
-class test_review(test_basemodel):
+class test_review(unittest.TestCase):
     """ Unittests for review.py """
 
     def setUp(self):
