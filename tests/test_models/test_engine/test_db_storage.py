@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-Contains the TestDBStorageDocs and TestDBStorage classes
-"""
+"""TestDBStorageDocs and TestDBStorage classes"""
 
 from datetime import datetime
 import inspect
@@ -18,17 +16,17 @@ import json
 import os
 import pep8
 import unittest
-DBStorage = db_storage.DBStorage
-classes = {"Amenity": Amenity, "City": City, "Place": Place,
-           "Review": Review, "State": State, "User": User}
+DatabaseStorage = db_storage.DBStorage
+test_classes = {"Amenity": Amenity, "City": City, "Place": Place,
+                "Review": Review, "State": State, "User": User}
 
 
-class TestDBStorageDocs(unittest.TestCase):
-    """Tests to check the documentation and style of DBStorage class"""
+class TestDatabaseStorageDocs(unittest.TestCase):
+    """Tests to check the documentation and style of DatabaseStorage class"""
     @classmethod
     def setUpClass(cls):
         """Set up for the doc tests"""
-        cls.dbs_f = inspect.getmembers(DBStorage, inspect.isfunction)
+        cls.dbs_f = inspect.getmembers(DatabaseStorage, inspect.isfunction)
 
     def test_pep8_conformance_db_storage(self):
         """Test that models/engine/db_storage.py conforms to PEP8."""
@@ -53,14 +51,14 @@ test_db_storage.py'])
                         "db_storage.py needs a docstring")
 
     def test_db_storage_class_docstring(self):
-        """Test for the DBStorage class docstring"""
-        self.assertIsNot(DBStorage.__doc__, None,
-                         "DBStorage class needs a docstring")
-        self.assertTrue(len(DBStorage.__doc__) >= 1,
-                        "DBStorage class needs a docstring")
+        """Test for the DatabaseStorage class docstring"""
+        self.assertIsNot(DatabaseStorage.__doc__, None,
+                         "DatabaseStorage class needs a docstring")
+        self.assertTrue(len(DatabaseStorage.__doc__) >= 1,
+                        "DatabaseStorage class needs a docstring")
 
     def test_dbs_func_docstrings(self):
-        """Test for the presence of docstrings in DBStorage methods"""
+        """Test for the presence of docstrings in DatabaseStorage methods"""
         for func in self.dbs_f:
             self.assertIsNot(func[1].__doc__, None,
                              "{:s} method needs a docstring".format(func[0]))
@@ -72,7 +70,7 @@ class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
     @unittest.skipIf(models.switch != 'db', "not testing db storage")
     def test_all_returns_dict(self):
-        """Test that all returns a dictionaty"""
+        """Test that all returns a dictionary"""
         self.assertIs(type(models.storage.all()), dict)
 
     @unittest.skipIf(models.switch != 'db', "not testing db storage")
@@ -81,8 +79,9 @@ class TestFileStorage(unittest.TestCase):
 
     @unittest.skipIf(models.switch != 'db', "not testing db storage")
     def test_new(self):
-        """test that new adds an object to the database"""
+        """Test that new adds an object to the database"""
 
     @unittest.skipIf(models.switch != 'db', "not testing db storage")
     def test_save(self):
         """Test that save properly saves objects to file.json"""
+

@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""Module of the class TestConsoleDocs."""
+"""Contains the class TestConsoleDocs
+"""
 
 import console
 import pep8
