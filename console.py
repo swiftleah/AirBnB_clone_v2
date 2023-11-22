@@ -62,15 +62,13 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return False
 
-        class_name = args[0]
-
-        if class_name not in CLASSES:
+        if args[0] in CLASSES:
+            class_arguments = args[1:]
+            new_dict = self._key_value_parser(class_arguments)
+            instance = CLASSES[args[0]](**new_dict)
+        else:
             print("** class doesn't exist **")
             return False
-
-        class_args = args[1:]
-        new_dict = self._key_value_parser(class_args)
-        instance = CLASSES[class_name](**new_dict)
 
         print(instance.id)
         instance.save()
