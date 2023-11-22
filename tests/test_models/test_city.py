@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""TestCustomCityDocs classes"""
+""" Unittesting for city.py """
 
 from datetime import datetime
 import inspect
@@ -8,8 +8,8 @@ from models import custom_city
 from models.base_model import BaseModel
 import unittest
 
-class TestCustomCity(unittest.TestCase):
-    """Test the CustomCity class"""
+class TestCity(unittest.TestCase):
+    """Tests for city """
     def test_city_init(self):
         """ tests initialization """
         city = City(state_id="state_1", name="Test City")
