@@ -1,19 +1,7 @@
-#!/usr/bin/python
-""" Module defines Aminety class."""
-import models
-from models.base_model import BaseModel, Base
-import sqlalchemy
-from sqlalchemy import Column, String
-from sqlalchemy.orm import relationship
+#!/usr/bin/python3
+""" State Module for HBNB project """
+from models.base_model import BaseModel
 
-class Amenity(BaseModel, Base):
-    """Representation of Amenity"""
-    if models.storage_type == 'db':
-        __tablename__ = 'amenities'
-        name = Column(String(128), nullable=False)
-    else:
-        name = ""
 
-    def __init__(self, *args, **kwargs):
-        """Initializes Amenity"""
-        super().__init__(*args, **kwargs)
+class Amenity(BaseModel):
+    name = ""
