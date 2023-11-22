@@ -22,15 +22,15 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
 
     def do_EOF(self, arg):
-        """Exit the console."""
+        """ Handles EOF to exit program """
         return True
 
     def emptyline(self):
-        """Overwrite the emptyline method."""
+        """ Overrides the emptyline method of CMD """
         return False
 
     def do_quit(self, arg):
-        """Quit the console."""
+        """ Method to exit the HBNB console"""
         return True
 
     def _key_value_parser(self, args):
@@ -38,20 +38,23 @@ class HBNBCommand(cmd.Cmd):
         new_dict = {}
         for arg in args:
             if "=" in arg:
-                kvp = arg.split('=', 1)
-                key = kvp[0]
-                value = kvp[1]
-                if value[0] == value[-1] == '"':
-                    value = shlex.split(value)[0].replace('_', ' ')
-                else:
+                continue
+
+            pair = arg.split('=', 1)
+            key = pair[0]
+            value = pair[1]
+
+            if value[0] == value[-1] == '"':
+                value = shlex.split(value)[0].replace('_', ' ')
+            else:
+                try:
+                    value = int(value)
+                except:
                     try:
-                        value = int(value)
+                        value = float(value)
                     except:
-                        try:
-                            value = float(value)
-                        except:
-                            continue
-                new_dict[key] = value
+                        continue
+            new_dict[key] = value
         return new_dict
 
     def do_create(self, arg):
