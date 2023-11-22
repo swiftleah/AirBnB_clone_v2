@@ -1,15 +1,13 @@
 #!/usr/bin/python
-""" defines the class City"""
+"""Defines the City class."""
+
 import models
 from models.base_model import BaseModel, Base
-from os import getenv
-import sqlalchemy
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 
-
 class City(BaseModel, Base):
-    """Representation of city """
+    """Representation of a city."""
     if models.switch == "db":
         __tablename__ = 'cities'
         state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
@@ -20,5 +18,5 @@ class City(BaseModel, Base):
         name = ""
 
     def __init__(self, *args, **kwargs):
-        """initializes city"""
+        """Initializes a city instance."""
         super().__init__(*args, **kwargs)
