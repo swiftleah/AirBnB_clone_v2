@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-Contains the TestStateDocs classes
-"""
+"""TestStateDocs classes"""
 
 from datetime import datetime
 import inspect
