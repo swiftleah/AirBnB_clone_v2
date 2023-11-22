@@ -41,6 +41,3 @@ class TestConsole(unittest.TestCase):
                          "HBNBCommand class needs a docstring")
         self.assertTrue(len(class_doc) >= 1,
                         "HBNBCommand class needs a docstring")
-
-if __name__ == '__main__':
-    unittest.main()
