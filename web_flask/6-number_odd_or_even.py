@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" script starts a Flask web application listening on 0.0.0.0
+""" this script starts a Flask web application listening on 0.0.0.0
         port 5000, Route '/' displaying 'Hello HBNB!' """
 from flask import Flask
 app = Flask(__name__)
@@ -37,6 +37,12 @@ def only_python(text=None):
 def number_int(n):
     """  number_int method: display "n is a number" only if n is an integer """
     return ('{:d} is a number'.format(n))
+
+@app.route('/number_template/<int:n>', strict_slashes=False)
+def num_template(n):
+    """ num_template method: display a HTML page only if n is an integer
+        route /number_templates with the integer n """
+    return (render_template('5-number.html', n=n))
 
 
 if __name__ == "__main__":
